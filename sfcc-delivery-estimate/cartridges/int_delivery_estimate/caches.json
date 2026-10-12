@@ -1,0 +1,6 @@
+{
+  "caches": [
+    { "id": "DeliveryEstimateTier", "maxEntries": 5000, "expireAfterSeconds": 600 },
+    { "id": "DeliveryEstimateFailure", "maxEntries": 5000, "expireAfterSeconds": 60 }
+  ]
+}

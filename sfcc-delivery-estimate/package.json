@@ -1,0 +1,21 @@
+{
+  "name": "int_delivery_estimate",
+  "version": "1.0.0",
+  "description": "SFRA PDP delivery estimate block driven by an external fulfilment service",
+  "scripts": {
+    "compile:js": "sgmf-scripts --compile js",
+    "compile:scss": "sgmf-scripts --compile css",
+    "compile": "npm run compile:js && npm run compile:scss",
+    "mock": "node mock/server.js",
+    "uploadCartridge": "sgmf-scripts --uploadCartridge int_delivery_estimate"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.8",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.69.0",
+    "sass-loader": "^7.3.1",
+    "sgmf-scripts": "^2.4.2"
+  }
+}

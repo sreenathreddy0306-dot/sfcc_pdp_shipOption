@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="deliveryEstimateEnabled">
+                <display-name xml:lang="x-default">Delivery Estimate: enabled</display-name>
+                <description xml:lang="x-default">Master switch. Off = no slot rendered, no service calls, endpoint returns 204.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="deliveryEstimateCacheMinutes">
+                <display-name xml:lang="x-default">Delivery Estimate: response cache (minutes)</display-name>
+                <description xml:lang="x-default">How long a delivery fragment is cached by the page cache/CDN and browser. 1-1440, default 10.</description>
+                <type>int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>10</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="deliveryEstimateDefaultCountry">
+                <display-name xml:lang="x-default">Delivery Estimate: default country</display-name>
+                <description xml:lang="x-default">ISO 3166-1 alpha-2 code used when the locale has no country (e.g. US).</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>US</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="DeliveryEstimate">
+                <display-name xml:lang="x-default">Delivery Estimate</display-name>
+                <attribute attribute-id="deliveryEstimateEnabled"/>
+                <attribute attribute-id="deliveryEstimateCacheMinutes"/>
+                <attribute attribute-id="deliveryEstimateDefaultCountry"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

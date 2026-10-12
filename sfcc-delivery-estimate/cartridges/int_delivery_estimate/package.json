@@ -1,0 +1,6 @@
+{
+  "name": "int_delivery_estimate",
+  "version": "1.0.0",
+  "description": "PDP delivery estimate (fulfilment tier) cartridge",
+  "caches": "./caches.json"
+}

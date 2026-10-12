@@ -1,0 +1,34 @@
+<!-- Availability (base SFRA 8.0.0 markup, unchanged) -->
+<div class="row availability product-availability" data-ready-to-order="${product.readyToOrder}" data-available="${product.available}">
+    <isinclude template="product/components/availability" />
+</div>
+
+<iscomment>
+    Delivery estimate slot. productAvailability is also included for bundle/set items;
+    render only for the page's own product.
+</iscomment>
+<isscript>
+    var deHelper = require('*/cartridge/scripts/helpers/deliveryEstimateHelper');
+    var deCfg = deHelper.getSlotConfig();
+    var deIsPagePdp = !!(pdict.product && product && product.id === pdict.product.id);
+    var deSellable = product.readyToOrder && product.available;
+</isscript>
+ ${deCfg.enabled && deIsPagePdp}
+<isif condition="${deCfg.enabled && deIsPagePdp}">
+    <isscript>
+        var deAssets = require('*/cartridge/scripts/assets.js');
+        deAssets.addCss('/css/deliveryEstimate.css');
+        deAssets.addJs('/js/deliveryEstimate.js');
+    </isscript>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <div class="delivery-estimate js-delivery-estimate"
+         data-url="${deCfg.url}"
+         data-country="${deCfg.country}"
+         data-pid="${deSellable ? product.id : ''}"
+         data-state="${deSellable ? 'loading' : 'hidden'}"
+         role="status" aria-live="polite" aria-busy="${deSellable ? 'true' : 'false'}">
+        <div class="delivery-estimate__skeleton" aria-hidden="true"></div>
+        <span class="sr-only delivery-estimate__loading-text">${Resource.msg('delivery.loading', 'deliveryEstimate', null)}</span>
+        <div class="delivery-estimate__content js-delivery-estimate-content"></div>
+    </div>
+</isif>

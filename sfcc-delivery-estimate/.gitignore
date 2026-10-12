@@ -1,0 +1,5 @@
+node_modules/
+*.log
+cartridges/**/cartridge/static/
+.DS_Store
+dw.json

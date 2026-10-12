@@ -1,0 +1,31 @@
+<iscomment>
+    Base SFRA availability markup (VERIFY against app_storefront_base in your sandbox),
+    followed by the delivery estimate slot.
+</iscomment>
+<div class="row availability align-self-center" data-ready-to-order="${product.readyToOrder}" data-available="${product.available}">
+    <isinclude template="product/components/availability" />
+</div>
+
+<isscript>
+    var deHelper = require('*/cartridge/scripts/helpers/deliveryEstimateHelper');
+    var deCfg = deHelper.getSlotConfig();
+    var deSellable = product.readyToOrder && product.available;
+</isscript>
+<isif condition="${deCfg.enabled}">
+    <isscript>
+        var deAssets = require('*/cartridge/scripts/assets.js');
+        deAssets.addCss('/css/deliveryEstimate.css');
+        deAssets.addJs('/js/deliveryEstimate.js');
+    </isscript>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <div class="delivery-estimate js-delivery-estimate"
+         data-url="${deCfg.url}"
+         data-country="${deCfg.country}"
+         data-pid="${deSellable ? product.id : ''}"
+         data-state="${deSellable ? 'loading' : 'hidden'}"
+         role="status" aria-live="polite" aria-busy="${deSellable ? 'true' : 'false'}">
+        <div class="delivery-estimate__skeleton" aria-hidden="true"></div>
+        <span class="sr-only delivery-estimate__loading-text">${Resource.msg('delivery.loading', 'deliveryEstimate', null)}</span>
+        <div class="delivery-estimate__content js-delivery-estimate-content"></div>
+    </div>
+</isif>

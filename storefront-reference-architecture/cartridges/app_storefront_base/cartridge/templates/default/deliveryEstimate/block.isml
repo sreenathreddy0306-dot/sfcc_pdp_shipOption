@@ -1,0 +1,13 @@
+<isscript>
+    var deURLUtils = require('dw/web/URLUtils');
+    var deBodyMarkup = (pdict.body && pdict.body.markup) ? String(pdict.body.markup) : '';
+    var deHasOwnMedia = deBodyMarkup.indexOf('de-card__media') > -1;
+</isscript>
+<div class="delivery-estimate__block delivery-estimate__block--${pdict.slug}" data-tier="${pdict.tier}">
+    <isprint value="${pdict.body}" encoding="off" />
+    <isif condition="${!deHasOwnMedia}">
+        <div class="de-card__media"> gggg
+            <img class="de-image" src="${deURLUtils.staticURL('/delivery-estimate/delivery-truck.png')}" alt="" loading="lazy">
+        </div>
+    </isif>
+</div>

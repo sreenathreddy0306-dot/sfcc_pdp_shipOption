@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="delivery.fulfillment.cred">
+        <url>https://REPLACE-ME.free.beeceptor.com</url>
+        <user-id>REPLACE-ME</user-id>
+        <password masked="true">REPLACE-ME</password>
+    </service-credential>
+
+    <service-profile service-profile-id="delivery.fulfillment.profile">
+        <timeout-millis>1500</timeout-millis>
+        <rate-limit-enabled>true</rate-limit-enabled>
+        <rate-limit-calls>50</rate-limit-calls>
+        <rate-limit-millis>1000</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
+        <cb-calls>5</cb-calls>
+        <cb-millis>30000</cb-millis>
+    </service-profile>
+
+    <service service-id="delivery.fulfillment.http">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>FULFILL</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>true</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>delivery.fulfillment.profile</profile-id>
+        <credential-id>delivery.fulfillment.cred</credential-id>
+    </service>
+</services>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">
+    <content content-id="delivery-estimate-same-day">
+        <display-name xml:lang="x-default">Delivery Estimate - Same day</display-name>
+        <description xml:lang="x-default">Shown on the PDP when the fulfilment tier matches. Edit text/image in the body (source view); keep this asset online.</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default"><![CDATA[<div class="de-card__main"><span class="de-icon de-icon--bolt" aria-hidden="true"></span><p class="de-eyebrow">Delivery option</p><p class="de-title">Same-day delivery</p><p class="de-sub">Order before 4:00 PM to get it today</p><p class="de-badge"><span class="de-badge__icon de-badge__icon--clock" aria-hidden="true"></span>Cut-off 4:00 PM</p></div><div class="de-card__media"><img class="de-image" src="$staticlink$/delivery-estimate/delivery-truck.jpg" alt="" loading="lazy"></div>]]></custom-attribute>
+        </custom-attributes>
+    </content>
+    <content content-id="delivery-estimate-next-day">
+        <display-name xml:lang="x-default">Delivery Estimate - Next day</display-name>
+        <description xml:lang="x-default">Shown on the PDP when the fulfilment tier matches. Edit text/image in the body (source view); keep this asset online.</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default"><![CDATA[<div class="de-card__main"><span class="de-icon de-icon--truck" aria-hidden="true"></span><p class="de-eyebrow">Delivery option</p><p class="de-title">Next-day delivery</p><p class="de-sub">Arrives tomorrow if you order today</p><p class="de-badge"><span class="de-badge__icon de-badge__icon--calendar" aria-hidden="true"></span>Arrives tomorrow</p></div><div class="de-card__media"><img class="de-image" src="$staticlink$/delivery-estimate/delivery-truck.jpg" alt="" loading="lazy"></div>]]></custom-attribute>
+        </custom-attributes>
+    </content>
+    <content content-id="delivery-estimate-standard">
+        <display-name xml:lang="x-default">Delivery Estimate - Standard</display-name>
+        <description xml:lang="x-default">Shown on the PDP when the fulfilment tier matches. Edit text/image in the body (source view); keep this asset online.</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default"><![CDATA[<div class="de-card__main"><span class="de-icon de-icon--box" aria-hidden="true"></span><p class="de-eyebrow">Delivery option</p><p class="de-title">Standard delivery</p><p class="de-sub">Delivered in 3&#8211;5 business days</p><p class="de-badge"><span class="de-badge__icon de-badge__icon--shield" aria-hidden="true"></span>Tracked &amp; insured</p></div><div class="de-card__media"><img class="de-image" src="$staticlink$/delivery-estimate/delivery-truck.jpg" alt="" loading="lazy"></div>]]></custom-attribute>
+        </custom-attributes>
+    </content>
+    <content content-id="delivery-estimate-fallback">
+        <display-name xml:lang="x-default">Delivery Estimate - Fallback</display-name>
+        <description xml:lang="x-default">Shown on the PDP when the fulfilment tier matches. Edit text/image in the body (source view); keep this asset online.</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default"><![CDATA[<div class="de-card__main"><span class="de-icon de-icon--box" aria-hidden="true"></span><p class="de-eyebrow">Delivery option</p><p class="de-title">Delivery options</p><p class="de-sub">Delivery options and dates are confirmed at checkout</p><p class="de-badge"><span class="de-badge__icon de-badge__icon--shield" aria-hidden="true"></span>Tracked &amp; insured</p></div><div class="de-card__media"><img class="de-image" src="$staticlink$/delivery-estimate/delivery-truck.jpg" alt="" loading="lazy"></div>]]></custom-attribute>
+        </custom-attributes>
+    </content>
+</library>

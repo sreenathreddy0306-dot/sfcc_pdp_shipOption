@@ -1,0 +1,101 @@
+// Delivery estimate block. Plain-CSS-compatible SCSS (no preprocessing features needed).
+// Fallback face tuned toward Montserrat metrics -> minimal shift on font swap (values approximate).
+@font-face {
+    font-family: 'Montserrat Fallback';
+    src: local('Arial');
+    size-adjust: 112%;
+    ascent-override: 84%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+}
+
+.delivery-estimate {
+    --de-font: 'Montserrat', 'Montserrat Fallback', Arial, sans-serif;
+    --de-h: 220px;                      /* reserved height: skeleton == card, no layout shift */
+    margin: 0.75rem 0;
+    min-height: var(--de-h);
+    font-family: var(--de-font);
+}
+.delivery-estimate * { font-family: var(--de-font); box-sizing: border-box; }
+@media (min-width: 768px) { .delivery-estimate { --de-h: 240px; } }
+
+.delivery-estimate[data-state='hidden'] { display: none; }
+.delivery-estimate[data-state='loading'] .delivery-estimate__content { display: none; }
+.delivery-estimate[data-state='ready'] .delivery-estimate__skeleton,
+.delivery-estimate[data-state='ready'] .delivery-estimate__loading-text { display: none; }
+
+.delivery-estimate__skeleton {
+    height: var(--de-h);
+    border-radius: 10px;
+    background: linear-gradient(90deg, #eee 25%, #f6f6f6 37%, #eee 63%);
+    background-size: 400% 100%;
+    animation: de-shimmer 1.4s ease infinite;
+}
+
+/* ---- card ---------------------------------------------------------------- */
+.delivery-estimate__block {
+    --de-accent: #5c6670;               /* standard + fallback (grey) */
+    display: flex;
+    min-height: var(--de-h);
+    overflow: hidden;
+    border-radius: 10px;
+    background: #fff;
+    color: #1a1a1a;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.14);
+}
+.delivery-estimate__block--same-day { --de-accent: #2f7d2b; }   /* green */
+.delivery-estimate__block--next-day { --de-accent: #2679b8; }   /* blue  */
+
+.de-card__main {
+    flex: 1 1 62%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 16px 16px 20px;
+    min-width: 0;
+}
+.de-card__media { flex: 0 0 38%; position: relative; min-height: 100%; }
+.de-card__media .de-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.de-card__main p { margin: 0; }
+.de-eyebrow { margin-top: 12px !important; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--de-accent); }
+.de-title   { margin-top: 4px !important; font-size: 20px; font-weight: 600; line-height: 1.2; color: #1a1a1a; }
+.de-sub     { margin-top: 6px !important; font-size: 13px; font-weight: 400; line-height: 1.4; color: #4a4a4a; }
+
+/* icon tile (top-left) and pill badge (bottom-left) */
+.de-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 6px;
+    background: var(--de-accent);
+}
+.de-icon::before, .de-badge__icon {
+    content: ''; display: inline-block; background: #fff;
+    -webkit-mask: var(--de-mask) center / contain no-repeat;
+            mask: var(--de-mask) center / contain no-repeat;
+}
+.de-icon::before { width: 24px; height: 24px; }
+
+.de-badge {
+    margin-top: auto !important; padding: 5px 12px 5px 10px;
+    display: inline-flex; align-items: center; gap: 6px;
+    border-radius: 999px; background: var(--de-accent); color: #fff;
+    font-size: 12px; font-weight: 700; line-height: 1.2;
+}
+.de-badge__icon { width: 14px; height: 14px; }
+
+.de-icon--bolt::before, .de-badge__icon--bolt { --de-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M13 2L4 14h7l-1 8 9-12h-7z'/%3E%3C/svg%3E"); }
+.de-icon--truck::before, .de-badge__icon--truck { --de-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M1 4h14v11H1zM15 8h4l4 4v3h-8zM6 20a2 2 0 100-4 2 2 0 000 4zm12 0a2 2 0 100-4 2 2 0 000 4z'/%3E%3C/svg%3E"); }
+.de-icon--box::before, .de-badge__icon--box { --de-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 2L3 7v10l9 5 9-5V7zm0 2.3L18.5 8 12 11.7 5.5 8zM5 9.6l6 3.4v7l-6-3.4zm14 0v7L13 20v-7z'/%3E%3C/svg%3E"); }
+.de-icon--shield::before, .de-badge__icon--shield { --de-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z'/%3E%3C/svg%3E"); }
+.de-icon--calendar::before, .de-badge__icon--calendar { --de-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7 2v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-2V2h-2v2H9V2zM5 10h14v10H5z'/%3E%3C/svg%3E"); }
+.de-icon--clock::before, .de-badge__icon--clock { --de-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 110 16 8 8 0 010-16zm-1 3v6l5 3 1-1.6-4-2.4V7z'/%3E%3C/svg%3E"); }
+
+@media (min-width: 768px) {
+    .de-card__main { padding: 18px 20px 18px 24px; }
+    .de-icon { width: 48px; height: 48px; }
+    .de-title { font-size: 22px; }
+    .de-sub { font-size: 14px; }
+}
+
+@keyframes de-shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+@media (prefers-reduced-motion: reduce) { .delivery-estimate__skeleton { animation: none; } }

@@ -1,0 +1,3 @@
+<div class="delivery-estimate__block delivery-estimate__block--${pdict.slug}" data-tier="${pdict.tier}">
+    <isprint value="${pdict.body}" encoding="off" />
+</div>
