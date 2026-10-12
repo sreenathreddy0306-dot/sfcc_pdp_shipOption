@@ -4,8 +4,8 @@ On the PDP, when the selected variant is **In Stock**, the storefront asks an ex
 service for a delivery tier (`SAME_DAY`, `NEXT_DAY`, `STANDARD`) and renders a brand-managed
 content block below the availability info. Card design follows the supplied references (see `docs/preview.html`). Montserrat, responsive, accessible, cached, and fail-safe: a slow/failing service can never block or break the PDP.
 
-* Technical doc: [`docs/TECHNICAL.md`](docs/TECHNICAL.md)
-* Business doc (content editing, on/off switch): [`docs/BUSINESS_GUIDE.md`](docs/BUSINESS_GUIDE.md)
+* Technical doc: [`docs/TECHNICAL.md`](sfcc-delivery-estimate/docs)
+* Business doc (content editing, on/off switch): [`docs/BUSINESS_GUIDE.md`](sfcc-delivery-estimate/docs)
 
 
 
