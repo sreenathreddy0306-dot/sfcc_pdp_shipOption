@@ -2,21 +2,17 @@
 
 On the PDP, when the selected variant is **In Stock**, the storefront asks an external fulfilment
 service for a delivery tier (`SAME_DAY`, `NEXT_DAY`, `STANDARD`) and renders a brand-managed
-content block below the availability info. Card design follows the supplied references (see `docs/preview.html`). Montserrat, responsive, accessible, cached, and
-fail-safe: a slow/failing service can never block or break the PDP.
+content block below the availability info. Card design follows the supplied references (see `docs/preview.html`). Montserrat, responsive, accessible, cached, and fail-safe: a slow/failing service can never block or break the PDP.
 
 * Technical doc: [`docs/TECHNICAL.md`](docs/TECHNICAL.md)
 * Business doc (content editing, on/off switch): [`docs/BUSINESS_GUIDE.md`](docs/BUSINESS_GUIDE.md)
 
-> **Status / honesty note:** written without access to a live SFRA sandbox. Code passes syntax
-> checks and the mock was designed to match the contract, but the cartridge was **not executed
-> on Commerce Cloud**. Section "Verify on first deploy" lists the few places most likely to need
-> adjusting against your SFRA version.
+
 
 ## How it works (short)
 
 ```
-PDP (cached) ──renders slot──▶ data-pid/country
+PDP (cached) ──renders content ──▶ data-pid/country
    browser JS ── GET DeliveryEstimate-Show?pid&country ──▶ controller
         sessionStorage memo + in-flight dedupe       │ (checks flag, variant, IN_STOCK)
                                                      ├─ custom cache (10 min hit / 1 min failure)
@@ -24,15 +20,6 @@ PDP (cached) ──renders slot──▶ data-pid/country
                                                      └─ Content asset per tier (BM-editable) → HTML fragment (page-cacheable)
 ```
 Service failure → neutral **fallback** content asset (or nothing). The PDP itself never waits on the service.
-
-## Repo layout
-
-```
-cartridges/int_delivery_estimate/      cartridge (controller, helper, service, templates, client JS/SCSS, caches.json)
-metadata/delivery_estimate_site_template/   BM-importable: services, site prefs, content assets
-mock/                                  local mock server + SKU behaviour map
-docs/                                  TECHNICAL.md, BUSINESS_GUIDE.md
-```
 
 ## Install
 
@@ -66,12 +53,6 @@ docs/                                  TECHNICAL.md, BUSINESS_GUIDE.md
 
 ## Mock service
 
-Pick one:
-
-* **Local (recommended for the full demo):** `npm run mock` (defaults `demo`/`demo`, port 3000), expose it
-  (`npx localtunnel --port 3000`) and put that URL in the credential. Edit `mock/skus.json`
-  with real sandbox variant SKUs. Behaviours: `SAME_DAY`, `NEXT_DAY`, `STANDARD`, `SLOW` (4 s),
-  `FLAKY` (50 % HTTP 500), `ERROR` (always 500), `BAD_TIER`.
 * **Beeceptor:** create `https://<name>.free.beeceptor.com`, add rules on `GET /fulfillment` with query
   `sku = <exact sku>` returning `{"sku":"…","country":"US","tier":"SAME_DAY"}` (one rule per tier); for the
   resilience SKU add a response delay of 4000 ms, or a 500 response. Enable Basic auth in Beeceptor's auth settings.
@@ -94,11 +75,6 @@ Pick one:
 | 9 | Wrong credentials | Fallback block, error logged (`deliveryEstimate` log) |
 | 10 | Lighthouse / DevTools Performance | CLS 0 from the block, no render-blocking font |
 
-## Verify on first deploy
-
-* `templates/default/product/components/productAvailability.isml` overrides the SFRA 8.0.0 template included by `product/productDetails.isml`; it keeps the base markup and appends the slot. Do **not** also override `availability.isml` (it is included by quick view and the ajax path too).
-* `caches.json` key names (`expireAfterSeconds`) follow current docs; confirm for your platform version.
-* The `Montserrat Fallback` `size-adjust` values are approximate.
 
 ## Key decisions
 
